@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote for Your Favorite Team</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .team-container {
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .team-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .vote-button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .winner {
+            background-color: #2ecc71;
+        }
+
+        .pictures {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Vote for Your Favorite Team</h2>
+
+<div class="team-container" id="juventus">
+    <div class="team-picture">
+        <img     class="pictures"       src="https://cdn.freebiesupply.com/logos/thumbs/2x/fc-barcelona-logo.png"
+        alt="Juventus">
+    </div>
+    <button class="vote-button" onclick="vote('juventus')">Vote for Juventus</button>
+</div>
+
+<div class="team-container" id="barcelona">
+    <div class="team-picture">
+        <img class="pictures"           src="https://purepng.com/public/uploads/large/purepng.com-juventus-logojuventuslogojuventus-turin-logonew-21529676316hzqzr.png"
+        alt="Barcelona">
+    </div>
+    <button class="vote-button" onclick="vote('barcelona')">Vote for Barcelona</button>
+</div>
+
+<div class="team-container" id="inter">
+    <div class="team-picture">
+        <img class="pictures"          src="https://i.pinimg.com/originals/5f/7d/b6/5f7db63e2c0fc694aef02f1c64a31aab.jpg"
+        alt="Inter">
+    </div>
+    <button class="vote-button" onclick="vote('inter')">Vote for Inter</button>
+</div>
+
+<script>
+    let votes = {
+        juventus: 0,
+        barcelona: 0,
+        inter: 0
+    };
+
+    function vote(team) {
+        votes[team]++;
+        updateUI();
+    }
+
+    function updateUI() {
+        for (const team in votes) {
+            const container = document.getElementById(team);
+            const button = container.querySelector('.vote-button');
+            const pictureContainer = container.querySelector('.team-picture');
+
+            button.innerHTML = `Vote for ${team} (${votes[team]} votes)`;
+
+            if (votes[team] === Math.max(...Object.values(votes))) {
+                pictureContainer.classList.add('winner');
+            } else {
+                pictureContainer.classList.remove('winner');
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
